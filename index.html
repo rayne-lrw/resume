@@ -86,6 +86,9 @@
   .card p { margin: 0 0 12px; color: var(--muted); font-size: 15px; }
   .card ul { margin: 0; padding-left: 1.1em; font-size: 15px; }
   .card ul li::marker { color: var(--muted); }
+  .card.wide { grid-column: 1 / -1; }
+  .card.wide ul { columns: 2; column-gap: 32px; }
+  @media (max-width: 640px) { .card.wide ul { columns: 1; } }
   .card .price { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
 
   /* 關於我 */
@@ -98,10 +101,6 @@
   .facts b { display: block; font-size: 17px; font-weight: 700; }
   .facts span { font-size: 13px; color: var(--muted); }
 
-  /* 實績 */
-  .work .thumb { aspect-ratio: 16/9; border-radius: 4px; margin: 0 0 18px; overflow: hidden; background: var(--accent-soft); }
-  .work .thumb img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.8); }
-  .work .meta { font-size: 12px; color: var(--accent); letter-spacing: .1em; margin-bottom: 4px; }
 
   /* 流程 */
   .steps { counter-reset: s; display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
@@ -134,9 +133,21 @@
   .timeline b { display: block; font-weight: 500; }
   .timeline span { color: var(--muted); }
   @media (max-width: 520px) { .timeline li { grid-template-columns: 1fr; gap: 0; } }
+
+  /* 回到最上 */
+  .to-top {
+    position: fixed; right: 20px; bottom: 20px; z-index: 20;
+    width: 44px; height: 44px; border-radius: var(--radius);
+    display: grid; place-items: center;
+    background: var(--surface); color: var(--text); border: 1px solid var(--line);
+    opacity: 0; pointer-events: none; transform: translateY(8px);
+    transition: opacity .2s, transform .2s, border-color .2s;
+  }
+  .to-top.show { opacity: 1; pointer-events: auto; transform: none; }
+  .to-top:hover { border-color: var(--accent); }
 </style>
 </head>
-<body>
+<body id="top">
 
 <!--
   ============================================================
@@ -153,7 +164,6 @@
     <a class="brand" href="#top">羅睿文</a>
     <ul>
       <li><a href="#services">服務項目</a></li>
-      <li><a href="#work">實績案例</a></li>
       <li><a href="#skills">技術能力</a></li>
       <li><a href="#about">關於我</a></li>
     </ul>
@@ -161,15 +171,15 @@
   </div>
 </nav>
 
-<main id="top">
+<main>
 
   <!-- ===== 首屏 ===== -->
   <header class="hero">
     <div class="wrap">
-      <div class="eyebrow">中部地區　·　可遠端</div>
+      <div class="eyebrow">中部地區</div>
       <h1>羅睿文</h1>
       <p class="role">自動化設備電控　／　設備查修與改善</p>
-      <p class="lead">十年自動化設備經驗，從配線、電路圖、PLC 與人機程式，到整機規劃與現場查修。設備新建、改善或異常排除，皆可協助評估與處理。</p>
+      <p class="lead">十年自動化設備經驗，從配線、電路圖、PLC 與人機程式，到整機電控規劃與現場查修。設備電控、改善或異常排除，皆可協助評估與處理。</p>
       <div class="actions">
         <a class="btn primary" href="#services">服務項目</a>
         <a class="btn" href="#contact">聯絡方式</a>
@@ -180,8 +190,9 @@
         <li>電路圖繪製</li>
         <li>設備查修改善</li>
         <li>PID 溫控調適</li>
-        <li>Excel VBA／C# 小工具</li>
+        <li>Excel VBA／Python 小工具</li>
         <li>室內配線水電</li>
+        <li>AI 使用教學</li>
       </ul>
     </div>
   </header>
@@ -197,14 +208,14 @@
       <div class="grid">
         <div class="card">
           <h3>自動化設備電控</h3>
-          <p>新設備從無到有，或舊設備要升級自動化。</p>
+          <p>新設備的電控規劃，或舊設備要升級自動化。</p>
           <ul>
             <li>PLC 程式撰寫（LD／ST／SFC）</li>
             <li>人機介面、電腦圖控畫面規劃</li>
             <li>伺服、變頻器、感測器整合</li>
             <li>整機電控規劃與試機上線</li>
           </ul>
-          <div class="price">台達、三菱、基恩斯、AB、Codesys</div>
+          <div class="price">台達、三菱、基恩斯、AB</div>
         </div>
         <div class="card">
           <h3>設備查修與改善</h3>
@@ -221,7 +232,7 @@
           <h3>電路圖繪製＆BOM</h3>
           <p>沒有圖面、圖面跟現場對不起來，或新案需要出圖。</p>
           <ul>
-            <li>AutoCAD／Visio 電路圖繪製</li>
+            <li>AutoCAD 電路圖繪製</li>
             <li>現場配線反推補圖</li>
             <li>材料 BOM 表開立</li>
             <li>配電盤、電氣箱配線規劃</li>
@@ -233,7 +244,7 @@
           <p>重複的手工作業，交給程式自動處理。</p>
           <ul>
             <li>Excel 函數、VBA 自動化報表</li>
-            <li>C# 桌面小工具開發</li>
+            <li>Python 小工具開發</li>
             <li>MySQL／Access／MSSQL 資料庫應用</li>
             <li>Modbus RTU、TCP/IP 設備通訊收資料</li>
           </ul>
@@ -248,69 +259,46 @@
             <li>配管、拉線</li>
             <li>簡易自來水管配管</li>
           </ul>
-          <div class="price">以中部地區為主</div>
+          <div class="price">中部地區，其他地區須詳談</div>
         </div>
         <div class="card">
           <h3>教育訓練＆技術文件</h3>
           <p>設備交機後，讓現場人員看得懂、用得順。</p>
           <ul>
             <li>操作與維護教學手冊製作</li>
-            <li>新人教育訓練</li>
+            <li>教育訓練</li>
             <li>設備資料彙整、訂立作業規則</li>
           </ul>
           <div class="price">交機後的文件與訓練</div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== 02 實績案例 ===== -->
-  <section id="work">
-    <div class="wrap">
-      <div class="sec-head">
-        <div class="num">02 · WORK</div>
-        <h2>實績</h2>
-        <p>部分代表性的工作內容。</p>
-      </div>
-      <div class="grid two">
-        <div class="card work">
-          <div class="thumb"><img src="images/workbench.jpg" alt="電控配線與測試工作台"></div>
-          <div class="meta">溫控 PID 調適</div>
-          <h3>熱壓機升溫速率 3℃ → 5℃／分</h3>
-          <p>電熱式熱壓機是斜率升溫，目標溫度會隨時間一直變，原本最多每分鐘升 3℃，跟不上曲線。我深入研究 PID 調整，把升溫曲線優化到每分鐘 5℃，而且能跟上目標溫度。</p>
-        </div>
-        <div class="card work">
-          <div class="thumb"><img src="images/circuit.jpg" alt="馬達控制電路圖範例"></div>
-          <div class="meta">電路圖繪製</div>
-          <h3>動力與控制迴路圖面</h3>
-          <p>從電源、斷路器、電磁接觸器到馬達與 DC24V 控制迴路，完整規劃並繪製電路圖，現場配線與日後維修都有圖可依。</p>
-        </div>
-        <div class="card work">
-          <div class="meta">海外試機驗收</div>
-          <h3>日本驗收、中國上線</h3>
-          <p>赴日本出差完成設備試機驗收；赴中國現場處理全自動流程的缺漏，讓設備順利上線。</p>
-        </div>
-        <div class="card work">
-          <div class="meta">客戶信任</div>
-          <h3>被客戶指定上門維修</h3>
-          <p>站在客戶的角度把設備問題處理到位，曾有客戶指定由我到場維修。</p>
+        <div class="card wide">
+          <h3>AI 使用教學</h3>
+          <p>同樣是用 AI，問法不同，結果差很多。</p>
+          <ul>
+            <li>有效率的 AI 對談與提問方式</li>
+            <li>把需求寫成 AI 看得懂的指令</li>
+            <li>用 AI 整理資料、寫文件、做小工具</li>
+            <li>依你的實際工作內容示範</li>
+          </ul>
+          <div class="price">個人或團隊皆可</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== 03 技術能力 ===== -->
+
+  <!-- ===== 02 技術能力 ===== -->
   <section id="skills">
     <div class="wrap">
       <div class="sec-head">
-        <div class="num">03 · SKILLS</div>
+        <div class="num">02 · SKILLS</div>
         <h2>技術能力</h2>
-        <p>AB PLC、iFIX、InduSoft、MySQL、PID 等，皆是以既有經驗自學至獨立作業。</p>
+        <p>AB PLC、iFIX、InduSoft、MySQL、PID 等，皆是以既有經驗自學至獨立作業；現在再加上 AI 協作，上手新系統、開發新工具都更快。</p>
       </div>
       <div class="skills">
         <div class="card">
           <h3>PLC</h3>
-          <ul class="chips"><li>台達</li><li>三菱</li><li>基恩斯</li><li>AB</li><li>Codesys</li><li>LD</li><li>ST</li><li>SFC</li></ul>
+          <ul class="chips"><li>台達</li><li>三菱</li><li>基恩斯</li><li>AB</li><li>LD</li><li>ST</li><li>SFC</li></ul>
         </div>
         <div class="card">
           <h3>人機／圖控</h3>
@@ -318,7 +306,7 @@
         </div>
         <div class="card">
           <h3>程式＆資料庫</h3>
-          <ul class="chips"><li>C#</li><li>ASP.NET</li><li>VBA</li><li>VBScript</li><li>MySQL</li><li>MSSQL</li><li>Access</li><li>Git</li></ul>
+          <ul class="chips"><li>Python</li><li>HTML</li><li>VBA</li><li>VBScript</li><li>MySQL</li><li>MSSQL</li><li>Access</li><li>Git</li></ul>
         </div>
         <div class="card">
           <h3>通訊＆驅動</h3>
@@ -326,11 +314,7 @@
         </div>
         <div class="card">
           <h3>繪圖＆文書</h3>
-          <ul class="chips"><li>AutoCAD</li><li>Solid Edge</li><li>Visio</li><li>Excel 函數／樞紐</li><li>Outlook</li></ul>
-        </div>
-        <div class="card">
-          <h3>設備類型經驗</h3>
-          <ul class="chips"><li>PCB 壓合機</li><li>切張機</li><li>鋼構加工機</li><li>面板業無塵室設備</li><li>沖床配電盤</li><li>客製化設備</li></ul>
+          <ul class="chips"><li>AutoCAD</li><li>Excel 函數／樞紐</li></ul>
         </div>
       </div>
       <div class="certs">
@@ -342,13 +326,13 @@
     </div>
   </section>
 
-  <!-- ===== 04 關於我 ===== -->
+  <!-- ===== 03 關於我 ===== -->
   <section id="about">
     <div class="wrap about">
       <div class="avatar"><img src="images/avatar.jpg" alt="羅睿文"></div>
       <div>
         <div class="sec-head">
-          <div class="num">04 · ABOUT</div>
+          <div class="num">03 · ABOUT</div>
           <h2>關於我</h2>
         </div>
         <p>我是睿文，平常喜歡探索沒碰過的東西，也喜歡想一些哲學問題。這份好奇心讓我在自動化這條路上走了十多年，從配線、看圖開始，慢慢學會畫電路圖、寫程式、規劃整台設備。</p>
@@ -364,27 +348,27 @@
   </section>
 
 
-  <!-- ===== 05 合作流程 ===== -->
+  <!-- ===== 04 合作流程 ===== -->
   <section id="process">
     <div class="wrap">
       <div class="sec-head">
-        <div class="num">05 · PROCESS</div>
+        <div class="num">04 · PROCESS</div>
         <h2>合作流程</h2>
       </div>
       <div class="steps">
         <div class="card"><h3>聊需求</h3><p>先說說設備狀況或想做的事，照片、影片、圖面都歡迎。</p></div>
-        <div class="card"><h3>評估方案</h3><p>說明做法、需要的時間與費用，把話說在前頭。</p></div>
+        <div class="card"><h3>評估方案</h3><p>說明做法、需要的時間與費用，並列出可能的風險。</p></div>
         <div class="card"><h3>執行</h3><p>到場或遠端進行，過程中隨時回報。</p></div>
         <div class="card"><h3>交付＆說明</h3><p>交付成果與文件，教會你的人怎麼用、怎麼維護。</p></div>
       </div>
     </div>
   </section>
 
-  <!-- ===== 06 常見問題 ===== -->
+  <!-- ===== 05 常見問題 ===== -->
   <section id="faq">
     <div class="wrap">
       <div class="sec-head">
-        <div class="num">06 · FAQ</div>
+        <div class="num">05 · FAQ</div>
         <h2>常見問題</h2>
       </div>
       <details>
@@ -393,24 +377,24 @@
       </details>
       <details>
         <summary>可以到場嗎？服務範圍在哪？</summary>
-        <p>中部地區都可以到場。程式、圖面、小工具類的需求也可以遠端進行。</p>
+        <p>中部地區都可以到場，其他地區須詳談。程式、圖面、小工具類的需求也可以遠端進行。</p>
       </details>
       <details>
         <summary>怎麼收費？</summary>
-        <p>依需求內容評估報價，會在開始前講清楚，不會做到一半才加價。</p>
+        <p>依需求內容評估報價，開始前會先說明費用與可能的變數。若執行中遇到突發狀況需要調整，會先和你討論再進行。</p>
       </details>
       <details>
         <summary>為什麼打電話你沒接？</summary>
-        <p>我不接聽未知來電，麻煩先用 Email 留言，說明一下需求，我會盡快回覆。</p>
+        <p>未知來電我不一定會接聽，建議先用 Email 留言，說明一下需求，我會盡快回覆。</p>
       </details>
     </div>
   </section>
 
-  <!-- ===== 07 聯絡 ===== -->
+  <!-- ===== 06 聯絡 ===== -->
   <section id="contact" class="contact">
     <div class="wrap">
       <div class="sec-head">
-        <div class="num">07 · CONTACT</div>
+        <div class="num">06 · CONTACT</div>
         <h2>聯絡方式</h2>
         <p>請以 Email 簡述需求，可附上照片或圖面，收到後會盡快回覆。</p>
       </div>
@@ -427,6 +411,19 @@
 <footer>
   <div class="wrap">© 2026 羅睿文</div>
 </footer>
+
+<!-- 回到最上 -->
+<a class="to-top" href="#top" aria-label="回到最上方">
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+</a>
+<script>
+  (function () {
+    var btn = document.querySelector('.to-top');
+    function update() { btn.classList.toggle('show', window.scrollY > 400); }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+</script>
 
 </body>
 </html>
