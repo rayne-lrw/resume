@@ -1,1 +1,369 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>你的名字｜我能幫你做什麼</title>
+<meta name="description" content="個人服務介紹：我會做什麼、能提供哪些服務、如何與我合作。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  /* ===== 顏色：想換主色，改 --accent 就好 ===== */
+  :root {
+    --bg: #fbfaf7;
+    --surface: #ffffff;
+    --text: #1d1d1f;
+    --muted: #5f6368;
+    --line: #e7e4dd;
+    --accent: #d9622b;
+    --accent-soft: #fbe9df;
+    --radius: 16px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #141414;
+      --surface: #1d1d1d;
+      --text: #f2f2f2;
+      --muted: #a5a5a5;
+      --line: #2e2e2e;
+      --accent: #f08a54;
+      --accent-soft: #3a2418;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #141414;
+    --surface: #1d1d1d;
+    --text: #f2f2f2;
+    --muted: #a5a5a5;
+    --line: #2e2e2e;
+    --accent: #f08a54;
+    --accent-soft: #3a2418;
+  }
 
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Noto Sans TC", system-ui, -apple-system, "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+
+  /* ===== 導覽列 ===== */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 16px; }
+  .brand { font-weight: 900; text-decoration: none; letter-spacing: .02em; }
+  nav ul { display: flex; gap: 22px; list-style: none; margin: 0; padding: 0; font-size: 15px; }
+  nav ul a { text-decoration: none; color: var(--muted); }
+  nav ul a:hover { color: var(--text); }
+  @media (max-width: 640px) { nav ul { display: none; } }
+
+  /* ===== 按鈕 ===== */
+  .btn {
+    display: inline-block; padding: 12px 22px; border-radius: 999px;
+    font-weight: 700; text-decoration: none; font-size: 15px;
+    border: 1.5px solid var(--text); transition: transform .15s;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn.primary { background: var(--text); color: var(--bg); }
+  .btn.small { padding: 8px 16px; font-size: 14px; }
+
+  /* ===== 首屏 ===== */
+  .hero { padding: 96px 0 72px; }
+  .eyebrow {
+    display: inline-block; background: var(--accent-soft); color: var(--accent);
+    padding: 4px 12px; border-radius: 999px; font-size: 14px; font-weight: 700;
+  }
+  .hero h1 {
+    font-size: clamp(34px, 6vw, 60px); line-height: 1.2; font-weight: 900;
+    margin: 18px 0 18px; letter-spacing: -.01em;
+  }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero p.lead { font-size: clamp(17px, 2.2vw, 20px); color: var(--muted); max-width: 640px; margin: 0 0 32px; }
+  .hero .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 40px; padding: 0; list-style: none; }
+  .tags li { border: 1px solid var(--line); background: var(--surface); padding: 4px 12px; border-radius: 999px; font-size: 14px; color: var(--muted); }
+
+  /* ===== 區塊 ===== */
+  section { padding: 72px 0; border-top: 1px solid var(--line); }
+  .sec-head { margin-bottom: 36px; max-width: 640px; }
+  .sec-head .num { color: var(--accent); font-weight: 700; font-size: 14px; letter-spacing: .1em; }
+  .sec-head h2 { font-size: clamp(26px, 4vw, 36px); margin: 6px 0 8px; font-weight: 900; line-height: 1.3; }
+  .sec-head p { color: var(--muted); margin: 0; }
+
+  .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 26px;
+  }
+  .card .icon { font-size: 28px; line-height: 1; }
+  .card h3 { margin: 14px 0 6px; font-size: 20px; }
+  .card p { margin: 0 0 12px; color: var(--muted); font-size: 15px; }
+  .card ul { margin: 0; padding-left: 1.1em; font-size: 15px; }
+  .card .price { margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--line); font-size: 14px; color: var(--muted); }
+  .card .price strong { color: var(--text); font-size: 16px; }
+
+  /* 關於我 */
+  .about { display: grid; grid-template-columns: 1fr 1.6fr; gap: 40px; align-items: start; }
+  @media (max-width: 760px) { .about { grid-template-columns: 1fr; } }
+  .avatar {
+    aspect-ratio: 1; border-radius: var(--radius); background: var(--accent-soft);
+    display: grid; place-items: center; font-size: 72px; font-weight: 900; color: var(--accent);
+    overflow: hidden;
+  }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 24px; }
+  .facts div { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+  .facts b { display: block; font-size: 26px; font-weight: 900; }
+  .facts span { font-size: 13px; color: var(--muted); }
+
+  /* 作品 */
+  .work .thumb {
+    aspect-ratio: 16/10; border-radius: 10px; background: var(--accent-soft);
+    margin: -6px -6px 16px; display: grid; place-items: center; color: var(--accent); font-weight: 700;
+    overflow: hidden;
+  }
+  .work .thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .work .meta { font-size: 13px; color: var(--accent); font-weight: 700; }
+
+  /* 流程 */
+  .steps { counter-reset: s; display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+  .steps .card::before {
+    counter-increment: s; content: "0" counter(s);
+    font-weight: 900; font-size: 28px; color: var(--accent);
+  }
+  .steps .card h3 { margin-top: 6px; }
+
+  /* FAQ */
+  details { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; margin-bottom: 10px; }
+  summary { cursor: pointer; font-weight: 700; }
+  details p { color: var(--muted); margin: 10px 0 0; }
+
+  /* 聯絡 */
+  .contact { text-align: center; }
+  .contact .sec-head { margin: 0 auto 28px; }
+  .contact .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  footer { padding: 32px 0; text-align: center; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<!--
+  ============================================================
+  使用說明（慢慢改）：
+  - 所有【中括號】的地方都是要換成你自己內容的
+  - 想刪掉某個區塊：整段 <section> ... </section> 刪掉即可
+  - 想多加一張卡片：複製一整段 <div class="card"> ... </div>
+  - 主色在最上面 <style> 裡的 --accent
+  ============================================================
+-->
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top">【你的名字】</a>
+    <ul>
+      <li><a href="#services">服務項目</a></li>
+      <li><a href="#about">關於我</a></li>
+      <li><a href="#work">作品案例</a></li>
+      <li><a href="#process">合作流程</a></li>
+    </ul>
+    <a class="btn small primary" href="#contact">聯絡我</a>
+  </div>
+</nav>
+
+<main id="top">
+
+  <!-- ===== 首屏：一句話說清楚你能幫別人什麼 ===== -->
+  <header class="hero">
+    <div class="wrap">
+      <span class="eyebrow">目前可接案 · 【所在地／可遠端】</span>
+      <h1>嗨，我是【你的名字】<br>我幫你<em>【解決什麼問題】</em></h1>
+      <p class="lead">【一兩句話介紹：你擅長什麼、服務誰、帶來什麼結果。例如：我幫中小企業與個人品牌，把想法變成好用的網站、系統與自動化流程，省下時間、多做生意。】</p>
+      <div class="actions">
+        <a class="btn primary" href="#services">看看我能做什麼</a>
+        <a class="btn" href="#contact">直接聊聊</a>
+      </div>
+      <ul class="tags">
+        <li>【技能 1】</li>
+        <li>【技能 2】</li>
+        <li>【技能 3】</li>
+        <li>【技能 4】</li>
+        <li>【技能 5】</li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ===== 01 服務項目：最重要的區塊 ===== -->
+  <section id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="num">01 · SERVICES</div>
+        <h2>我可以幫你做這些事</h2>
+        <p>不確定需要哪一種？直接跟我說你遇到的狀況，我幫你判斷。</p>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <div class="icon">🛠️</div>
+          <h3>【服務 A 名稱】</h3>
+          <p>【一句話說明這項服務解決什麼問題】</p>
+          <ul>
+            <li>【包含內容 1】</li>
+            <li>【包含內容 2】</li>
+            <li>【包含內容 3】</li>
+          </ul>
+          <div class="price">參考價格 <strong>【NT$ X,XXX 起】</strong></div>
+        </div>
+        <div class="card">
+          <div class="icon">📈</div>
+          <h3>【服務 B 名稱】</h3>
+          <p>【一句話說明這項服務解決什麼問題】</p>
+          <ul>
+            <li>【包含內容 1】</li>
+            <li>【包含內容 2】</li>
+            <li>【包含內容 3】</li>
+          </ul>
+          <div class="price">參考價格 <strong>【NT$ X,XXX 起】</strong></div>
+        </div>
+        <div class="card">
+          <div class="icon">💬</div>
+          <h3>【服務 C 名稱】</h3>
+          <p>【一句話說明這項服務解決什麼問題】</p>
+          <ul>
+            <li>【包含內容 1】</li>
+            <li>【包含內容 2】</li>
+            <li>【包含內容 3】</li>
+          </ul>
+          <div class="price">參考價格 <strong>【依需求報價】</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 02 關於我：為什麼找你 ===== -->
+  <section id="about">
+    <div class="wrap about">
+      <!-- 有照片的話：把下面的「名」換成 <img src="photo.jpg" alt="我的照片"> -->
+      <div class="avatar">名</div>
+      <div>
+        <div class="sec-head">
+          <div class="num">02 · ABOUT</div>
+          <h2>為什麼可以找我</h2>
+        </div>
+        <p>【用你自己的話說：做過什麼、累積了哪些經驗、做事的風格。不用寫成履歷，重點是讓人知道「交給你很放心」。】</p>
+        <p>【第二段：你的特色或堅持。例如：溝通直接、準時交付、會主動提出更好的做法。】</p>
+        <div class="facts">
+          <div><b>【X】年</b><span>相關經驗</span></div>
+          <div><b>【XX】+</b><span>完成案子</span></div>
+          <div><b>【XX】%</b><span>回頭客</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 03 作品案例 ===== -->
+  <section id="work">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="num">03 · WORK</div>
+        <h2>做過的案例</h2>
+        <p>挑幾個有代表性的，說清楚「問題 → 做法 → 結果」。</p>
+      </div>
+      <div class="grid">
+        <div class="card work">
+          <!-- 有圖片的話：<div class="thumb"><img src="work1.jpg" alt=""></div> -->
+          <div class="thumb">作品圖</div>
+          <div class="meta">【類別】</div>
+          <h3>【案例名稱】</h3>
+          <p>【客戶遇到什麼問題，我怎麼做，最後帶來什麼成果】</p>
+        </div>
+        <div class="card work">
+          <div class="thumb">作品圖</div>
+          <div class="meta">【類別】</div>
+          <h3>【案例名稱】</h3>
+          <p>【客戶遇到什麼問題，我怎麼做，最後帶來什麼成果】</p>
+        </div>
+        <div class="card work">
+          <div class="thumb">作品圖</div>
+          <div class="meta">【類別】</div>
+          <h3>【案例名稱】</h3>
+          <p>【客戶遇到什麼問題，我怎麼做，最後帶來什麼成果】</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 04 合作流程 ===== -->
+  <section id="process">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="num">04 · PROCESS</div>
+        <h2>合作流程</h2>
+        <p>簡單、透明，每一步你都知道進度。</p>
+      </div>
+      <div class="steps">
+        <div class="card"><h3>聊需求</h3><p>免費諮詢，了解你的狀況與目標。</p></div>
+        <div class="card"><h3>提方案</h3><p>給你做法、時程與報價，確認後開始。</p></div>
+        <div class="card"><h3>執行</h3><p>過程中定期回報，隨時可以調整。</p></div>
+        <div class="card"><h3>交付＆售後</h3><p>完成交付，並提供【X】天內的修改與支援。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 05 常見問題 ===== -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="num">05 · FAQ</div>
+        <h2>常見問題</h2>
+      </div>
+      <details>
+        <summary>只有一個模糊的想法，也可以找你嗎？</summary>
+        <p>可以，很多合作都是從一個想法開始的。我們可以先聊，我幫你整理成具體的做法。</p>
+      </details>
+      <details>
+        <summary>怎麼收費？</summary>
+        <p>【例如：依專案報價，簽約時付 50%，完成後付 50%。小型需求也可以按時數計費。】</p>
+      </details>
+      <details>
+        <summary>大概多久可以完成？</summary>
+        <p>【例如：一般案子約 1–4 週，會在報價時給你明確的時程。】</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ===== 06 聯絡 ===== -->
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="num">06 · CONTACT</div>
+        <h2>有想法？來聊聊吧</h2>
+        <p>通常會在【24 小時】內回覆。</p>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="mailto:【你的 email】">寄 Email</a>
+        <a class="btn" href="【LINE 連結】">加 LINE</a>
+        <a class="btn" href="【其他連結，例如 IG / FB / GitHub】">【社群】</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">© 2026 【你的名字】</div>
+</footer>
+
+</body>
+</html>
