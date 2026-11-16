@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>你的名字｜我能幫你做什麼</title>
-<meta name="description" content="個人服務介紹：我會做什麼、能提供哪些服務、如何與我合作。">
+<title>羅睿文｜自動化電控與設備服務</title>
+<meta name="description" content="羅睿文：十年自動化設備經驗，提供 PLC／人機圖控程式、電路圖繪製、設備查修改善、PID 溫控調適、Excel VBA 與小工具開發、室內配線水電服務。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -128,6 +128,7 @@
   .facts b { display: block; font-size: 26px; font-weight: 900; }
   .facts span { font-size: 13px; color: var(--muted); }
 
+  .grid.two { grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); }
   /* 作品 */
   .work .thumb {
     aspect-ratio: 16/10; border-radius: 10px; background: var(--accent-soft);
@@ -156,6 +157,23 @@
   .contact .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
   footer { padding: 32px 0; text-align: center; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
+
+  /* 技能分組 */
+  .skills { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .skills h3 { font-size: 17px; margin: 0 0 10px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 0; }
+  .chips li { background: var(--accent-soft); color: var(--text); padding: 2px 10px; border-radius: 6px; font-size: 14px; }
+  .certs { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-top: 18px; }
+  .certs div { border: 1px solid var(--line); background: var(--surface); border-radius: 12px; padding: 12px 16px; font-weight: 700; }
+  .certs span { display: block; font-weight: 400; font-size: 13px; color: var(--muted); }
+  .quote { border-left: 3px solid var(--accent); padding-left: 14px; color: var(--muted); font-style: italic; }
+  .timeline { list-style: none; padding: 0; margin: 0; }
+  .timeline li { display: grid; grid-template-columns: 120px 1fr; gap: 14px; padding: 12px 0; border-bottom: 1px dashed var(--line); font-size: 15px; }
+  .timeline li:last-child { border-bottom: 0; }
+  .timeline .t { color: var(--muted); font-size: 14px; }
+  .timeline b { display: block; }
+  .timeline span { color: var(--muted); }
+  @media (max-width: 520px) { .timeline li { grid-template-columns: 1fr; gap: 0; } }
 </style>
 </head>
 <body>
@@ -163,21 +181,21 @@
 <!--
   ============================================================
   使用說明（慢慢改）：
-  - 所有【中括號】的地方都是要換成你自己內容的
-  - 想刪掉某個區塊：整段 <section> ... </section> 刪掉即可
+  - 文字直接改就好；想刪掉某個區塊，整段 <section> ... </section> 刪掉
   - 想多加一張卡片：複製一整段 <div class="card"> ... </div>
+  - 圖片放在 images/ 資料夾
   - 主色在最上面 <style> 裡的 --accent
   ============================================================
 -->
 
 <nav>
   <div class="wrap">
-    <a class="brand" href="#top">【你的名字】</a>
+    <a class="brand" href="#top">羅睿文</a>
     <ul>
       <li><a href="#services">服務項目</a></li>
+      <li><a href="#work">實績案例</a></li>
+      <li><a href="#skills">技術能力</a></li>
       <li><a href="#about">關於我</a></li>
-      <li><a href="#work">作品案例</a></li>
-      <li><a href="#process">合作流程</a></li>
     </ul>
     <a class="btn small primary" href="#contact">聯絡我</a>
   </div>
@@ -185,176 +203,287 @@
 
 <main id="top">
 
-  <!-- ===== 首屏：一句話說清楚你能幫別人什麼 ===== -->
+  <!-- ===== 首屏 ===== -->
   <header class="hero">
     <div class="wrap">
-      <span class="eyebrow">目前可接案 · 【所在地／可遠端】</span>
-      <h1>嗨，我是【你的名字】<br>我幫你<em>【解決什麼問題】</em></h1>
-      <p class="lead">【一兩句話介紹：你擅長什麼、服務誰、帶來什麼結果。例如：我幫中小企業與個人品牌，把想法變成好用的網站、系統與自動化流程，省下時間、多做生意。】</p>
+      <span class="eyebrow">彰化埔心 · 服務中部地區 · 可遠端</span>
+      <h1>嗨，我是羅睿文<br>讓你的設備<em>動得起來、穩得下來</em></h1>
+      <p class="lead">十年自動化設備經驗，從配線、電路圖、PLC／人機程式，到整機規劃與現場查修都做過。設備要新做、要改善、還是出了問題找不到原因，都可以找我聊聊。</p>
       <div class="actions">
         <a class="btn primary" href="#services">看看我能做什麼</a>
         <a class="btn" href="#contact">直接聊聊</a>
       </div>
       <ul class="tags">
-        <li>【技能 1】</li>
-        <li>【技能 2】</li>
-        <li>【技能 3】</li>
-        <li>【技能 4】</li>
-        <li>【技能 5】</li>
+        <li>PLC 程式</li>
+        <li>人機／圖控</li>
+        <li>電路圖繪製</li>
+        <li>設備查修改善</li>
+        <li>PID 溫控調適</li>
+        <li>Excel VBA／C# 小工具</li>
+        <li>室內配線水電</li>
       </ul>
     </div>
   </header>
 
-  <!-- ===== 01 服務項目：最重要的區塊 ===== -->
+  <!-- ===== 01 服務項目 ===== -->
   <section id="services">
     <div class="wrap">
       <div class="sec-head">
         <div class="num">01 · SERVICES</div>
         <h2>我可以幫你做這些事</h2>
-        <p>不確定需要哪一種？直接跟我說你遇到的狀況，我幫你判斷。</p>
+        <p>不確定需要哪一種？直接跟我說你遇到的狀況，我幫你判斷該怎麼做。</p>
       </div>
       <div class="grid">
         <div class="card">
-          <div class="icon">🛠️</div>
-          <h3>【服務 A 名稱】</h3>
-          <p>【一句話說明這項服務解決什麼問題】</p>
+          <div class="icon">⚙️</div>
+          <h3>自動化設備電控</h3>
+          <p>新設備從無到有，或舊設備要升級自動化。</p>
           <ul>
-            <li>【包含內容 1】</li>
-            <li>【包含內容 2】</li>
-            <li>【包含內容 3】</li>
+            <li>PLC 程式撰寫（LD／ST／SFC）</li>
+            <li>人機介面、電腦圖控畫面規劃</li>
+            <li>伺服、變頻器、感測器整合</li>
+            <li>整機電控規劃與試機上線</li>
           </ul>
-          <div class="price">參考價格 <strong>【NT$ X,XXX 起】</strong></div>
+          <div class="price">台達、三菱、基恩斯、AB、Codesys</div>
         </div>
         <div class="card">
-          <div class="icon">📈</div>
-          <h3>【服務 B 名稱】</h3>
-          <p>【一句話說明這項服務解決什麼問題】</p>
+          <div class="icon">🔧</div>
+          <h3>設備查修與改善</h3>
+          <p>設備常當機、動作不穩、效率不好，幫你找出根本原因。</p>
           <ul>
-            <li>【包含內容 1】</li>
-            <li>【包含內容 2】</li>
-            <li>【包含內容 3】</li>
+            <li>電路／程式異常查修</li>
+            <li>設備改造、配電調整</li>
+            <li>溫控 PID 調適、升溫曲線優化</li>
+            <li>現有設備流程優化</li>
           </ul>
-          <div class="price">參考價格 <strong>【NT$ X,XXX 起】</strong></div>
+          <div class="price">可到場，也可先遠端了解狀況</div>
         </div>
         <div class="card">
-          <div class="icon">💬</div>
-          <h3>【服務 C 名稱】</h3>
-          <p>【一句話說明這項服務解決什麼問題】</p>
+          <div class="icon">📐</div>
+          <h3>電路圖繪製＆BOM</h3>
+          <p>沒有圖面、圖面跟現場對不起來，或新案需要出圖。</p>
           <ul>
-            <li>【包含內容 1】</li>
-            <li>【包含內容 2】</li>
-            <li>【包含內容 3】</li>
+            <li>AutoCAD／Visio 電路圖繪製</li>
+            <li>現場配線反推補圖</li>
+            <li>材料 BOM 表開立</li>
+            <li>配電盤、電氣箱配線規劃</li>
           </ul>
-          <div class="price">參考價格 <strong>【依需求報價】</strong></div>
+          <div class="price">配電盤、控制箱、整機圖面</div>
+        </div>
+        <div class="card">
+          <div class="icon">💻</div>
+          <h3>小工具＆資料整合</h3>
+          <p>重複的手工作業，交給程式自動處理。</p>
+          <ul>
+            <li>Excel 函數、VBA 自動化報表</li>
+            <li>C# 桌面小工具開發</li>
+            <li>MySQL／Access／MSSQL 資料庫應用</li>
+            <li>Modbus RTU、TCP/IP 設備通訊收資料</li>
+          </ul>
+          <div class="price">也擅長用 AI 輔助加速開發</div>
+        </div>
+        <div class="card">
+          <div class="icon">🏠</div>
+          <h3>室內配線＆水電</h3>
+          <p>乙級室內配線技術士，家裡或店面的電路問題。</p>
+          <ul>
+            <li>家用電路查修、跳電排查</li>
+            <li>插座、開關、電力元件更換</li>
+            <li>配管、拉線</li>
+            <li>簡易自來水管配管</li>
+          </ul>
+          <div class="price">以彰化周邊為主</div>
+        </div>
+        <div class="card">
+          <div class="icon">📘</div>
+          <h3>教育訓練＆技術文件</h3>
+          <p>設備交機後，讓現場人員看得懂、用得順。</p>
+          <ul>
+            <li>操作與維護教學手冊製作</li>
+            <li>新人教育訓練</li>
+            <li>設備資料彙整、訂立作業規則</li>
+          </ul>
+          <div class="price">把「只有一個人會」變成「大家都會」</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== 02 關於我：為什麼找你 ===== -->
-  <section id="about">
-    <div class="wrap about">
-      <!-- 有照片的話：把下面的「名」換成 <img src="photo.jpg" alt="我的照片"> -->
-      <div class="avatar">名</div>
-      <div>
-        <div class="sec-head">
-          <div class="num">02 · ABOUT</div>
-          <h2>為什麼可以找我</h2>
-        </div>
-        <p>【用你自己的話說：做過什麼、累積了哪些經驗、做事的風格。不用寫成履歷，重點是讓人知道「交給你很放心」。】</p>
-        <p>【第二段：你的特色或堅持。例如：溝通直接、準時交付、會主動提出更好的做法。】</p>
-        <div class="facts">
-          <div><b>【X】年</b><span>相關經驗</span></div>
-          <div><b>【XX】+</b><span>完成案子</span></div>
-          <div><b>【XX】%</b><span>回頭客</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== 03 作品案例 ===== -->
+  <!-- ===== 02 實績案例 ===== -->
   <section id="work">
     <div class="wrap">
       <div class="sec-head">
-        <div class="num">03 · WORK</div>
-        <h2>做過的案例</h2>
-        <p>挑幾個有代表性的，說清楚「問題 → 做法 → 結果」。</p>
+        <div class="num">02 · WORK</div>
+        <h2>做過的事</h2>
+        <p>問題 → 做法 → 結果。</p>
       </div>
-      <div class="grid">
+      <div class="grid two">
         <div class="card work">
-          <!-- 有圖片的話：<div class="thumb"><img src="work1.jpg" alt=""></div> -->
-          <div class="thumb">作品圖</div>
-          <div class="meta">【類別】</div>
-          <h3>【案例名稱】</h3>
-          <p>【客戶遇到什麼問題，我怎麼做，最後帶來什麼成果】</p>
+          <div class="thumb"><img src="images/workbench.jpg" alt="電控配線與測試工作台"></div>
+          <div class="meta">溫控 PID 調適</div>
+          <h3>熱壓機升溫速率 3℃ → 5℃／分</h3>
+          <p>電熱式熱壓機是斜率升溫，目標溫度會隨時間一直變，原本最多每分鐘升 3℃，跟不上曲線。我深入研究 PID 調整，把升溫曲線優化到每分鐘 5℃，而且能跟上目標溫度。</p>
         </div>
         <div class="card work">
-          <div class="thumb">作品圖</div>
-          <div class="meta">【類別】</div>
-          <h3>【案例名稱】</h3>
-          <p>【客戶遇到什麼問題，我怎麼做，最後帶來什麼成果】</p>
+          <div class="thumb"><img src="images/circuit.jpg" alt="馬達控制電路圖範例"></div>
+          <div class="meta">電路圖繪製</div>
+          <h3>動力與控制迴路圖面</h3>
+          <p>從電源、斷路器、電磁接觸器到馬達與 DC24V 控制迴路，完整規劃並繪製電路圖，現場配線與日後維修都有圖可依。</p>
         </div>
         <div class="card work">
-          <div class="thumb">作品圖</div>
-          <div class="meta">【類別】</div>
-          <h3>【案例名稱】</h3>
-          <p>【客戶遇到什麼問題，我怎麼做，最後帶來什麼成果】</p>
+          <div class="thumb">🌏</div>
+          <div class="meta">海外試機驗收</div>
+          <h3>日本驗收、中國上線</h3>
+          <p>到職 3 個月就赴日本出差，設備順利驗收；半年後赴中國處理全自動流程的缺漏，讓設備成功上線。</p>
+        </div>
+        <div class="card work">
+          <div class="thumb">🤝</div>
+          <div class="meta">客戶信任</div>
+          <h3>被客戶指定上門維修</h3>
+          <p>擔任公司與客戶之間的橋樑，把設備問題處理到位，在職期間有客戶指定由我到場維修。</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== 04 合作流程 ===== -->
+  <!-- ===== 03 技術能力 ===== -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="num">03 · SKILLS</div>
+        <h2>用得到的工具，我都熟</h2>
+        <p>遇到沒用過的系統也不怕：AB PLC、iFIX、InduSoft、MySQL、PID 都是到職後靠自學做到獨立作業。</p>
+      </div>
+      <div class="skills">
+        <div class="card">
+          <h3>PLC</h3>
+          <ul class="chips"><li>台達</li><li>三菱</li><li>基恩斯</li><li>AB</li><li>Codesys</li><li>LD</li><li>ST</li><li>SFC</li></ul>
+        </div>
+        <div class="card">
+          <h3>人機／圖控</h3>
+          <ul class="chips"><li>台達</li><li>威綸</li><li>Pro-face</li><li>研華</li><li>InduSoft Web Studio</li><li>iFIX</li></ul>
+        </div>
+        <div class="card">
+          <h3>程式＆資料庫</h3>
+          <ul class="chips"><li>C#</li><li>ASP.NET</li><li>VBA</li><li>VBScript</li><li>MySQL</li><li>MSSQL</li><li>Access</li><li>Git</li></ul>
+        </div>
+        <div class="card">
+          <h3>通訊＆驅動</h3>
+          <ul class="chips"><li>Modbus RTU</li><li>TCP/IP</li><li>伺服</li><li>變頻器</li><li>台達</li><li>安川</li><li>工控儀表</li><li>各式感測器</li></ul>
+        </div>
+        <div class="card">
+          <h3>繪圖＆文書</h3>
+          <ul class="chips"><li>AutoCAD</li><li>Solid Edge</li><li>Visio</li><li>Excel 函數／樞紐</li><li>Outlook</li></ul>
+        </div>
+        <div class="card">
+          <h3>設備類型經驗</h3>
+          <ul class="chips"><li>PCB 壓合機</li><li>切張機</li><li>鋼構加工機</li><li>面板業無塵室設備</li><li>沖床配電盤</li><li>客製化設備</li></ul>
+        </div>
+      </div>
+      <div class="certs">
+        <div>乙級室內配線技術士<span>勞動部技能檢定</span></div>
+        <div>丙級室內配線技術士<span>勞動部技能檢定</span></div>
+        <div>丙級工業配線技術士<span>勞動部技能檢定</span></div>
+        <div>丙級自來水管配管技術士<span>勞動部技能檢定</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 04 關於我 ===== -->
+  <section id="about">
+    <div class="wrap about">
+      <div class="avatar"><img src="images/avatar.jpg" alt="羅睿文"></div>
+      <div>
+        <div class="sec-head">
+          <div class="num">04 · ABOUT</div>
+          <h2>為什麼可以找我</h2>
+        </div>
+        <p class="quote">「先處理心情，再處理事情。」</p>
+        <p>我在自動化設備領域超過十年，一路從配線、識圖，到電路圖繪製、寫程式、規劃人機與圖控，再到整台設備的規劃，一步一步做上來。所以從現場到程式，我都能用同一個人的角度把問題串起來看。</p>
+        <p>遇到問題，我會去找底層原因，不停在表面。做事理性、重邏輯，也喜歡把話說在前頭：能做什麼、做不到什麼、要多久，一開始就講清楚。客戶和我一樣，都希望設備好用、沒問題，這就是我做事的目標。</p>
+        <div class="facts">
+          <div><b>10+ 年</b><span>自動化設備經驗</span></div>
+          <div><b>4 張</b><span>技術士證照</span></div>
+          <div><b>電機系</b><span>建國科大畢業</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 05 經歷 ===== -->
+  <section id="history">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="num">05 · BACKGROUND</div>
+        <h2>經歷一覽</h2>
+      </div>
+      <ul class="timeline">
+        <li><div class="t">2024 – 2026</div><div><b>電控工程師</b><span>PCB 壓合機、切張機電控；InduSoft／iFIX 圖控、PID 調適、海外試機、教育訓練</span></div></li>
+        <li><div class="t">2023 – 2024</div><div><b>後端工程師</b><span>C# Web API 對接、MSSQL、測試除錯</span></div></li>
+        <li><div class="t">2022 – 2023</div><div><b>電控工程師</b><span>鋼構加工機配線、電路圖、Codesys／C# 程式、調機查修</span></div></li>
+        <li><div class="t">2020 – 2022</div><div><b>自動化工程師</b><span>開 BOM、配線、裝機測試；台達 PLC／人機、伺服變頻；帶領 4 人以下團隊</span></div></li>
+        <li><div class="t">2019 – 2020</div><div><b>駐點工程師</b><span>面板業無塵室設備維修、電路／軟體查修、設備改造</span></div></li>
+        <li><div class="t">2017 – 2019</div><div><b>工程師</b><span>客製化設備；基恩斯 PLC、AutoCAD 電路圖、裝機測試</span></div></li>
+        <li><div class="t">2014 – 2016</div><div><b>配線人員</b><span>沖床配電盤配線、電氣箱組裝、現場施工配電</span></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== 06 合作流程 ===== -->
   <section id="process">
     <div class="wrap">
       <div class="sec-head">
-        <div class="num">04 · PROCESS</div>
+        <div class="num">06 · PROCESS</div>
         <h2>合作流程</h2>
         <p>簡單、透明，每一步你都知道進度。</p>
       </div>
       <div class="steps">
-        <div class="card"><h3>聊需求</h3><p>免費諮詢，了解你的狀況與目標。</p></div>
-        <div class="card"><h3>提方案</h3><p>給你做法、時程與報價，確認後開始。</p></div>
-        <div class="card"><h3>執行</h3><p>過程中定期回報，隨時可以調整。</p></div>
-        <div class="card"><h3>交付＆售後</h3><p>完成交付，並提供【X】天內的修改與支援。</p></div>
+        <div class="card"><h3>聊需求</h3><p>先說說設備狀況或想做的事，照片、影片、圖面都歡迎。</p></div>
+        <div class="card"><h3>評估方案</h3><p>說明做法、需要的時間與費用，把話說在前頭。</p></div>
+        <div class="card"><h3>執行</h3><p>到場或遠端進行，過程中隨時回報。</p></div>
+        <div class="card"><h3>交付＆說明</h3><p>交付成果與文件，教會你的人怎麼用、怎麼維護。</p></div>
       </div>
     </div>
   </section>
 
-  <!-- ===== 05 常見問題 ===== -->
+  <!-- ===== 07 常見問題 ===== -->
   <section id="faq">
     <div class="wrap">
       <div class="sec-head">
-        <div class="num">05 · FAQ</div>
+        <div class="num">07 · FAQ</div>
         <h2>常見問題</h2>
       </div>
       <details>
-        <summary>只有一個模糊的想法，也可以找你嗎？</summary>
-        <p>可以，很多合作都是從一個想法開始的。我們可以先聊，我幫你整理成具體的做法。</p>
+        <summary>我的設備品牌你沒用過，可以處理嗎？</summary>
+        <p>可以先聊聊。我很多系統都是遇到之後自學到能獨立作業，PLC、人機的觀念是相通的。</p>
+      </details>
+      <details>
+        <summary>可以到場嗎？服務範圍在哪？</summary>
+        <p>我住在彰化埔心，中部地區都可以到場。程式、圖面、小工具類的需求也可以遠端進行。</p>
       </details>
       <details>
         <summary>怎麼收費？</summary>
-        <p>【例如：依專案報價，簽約時付 50%，完成後付 50%。小型需求也可以按時數計費。】</p>
+        <p>依需求內容評估報價，會在開始前講清楚，不會做到一半才加價。</p>
       </details>
       <details>
-        <summary>大概多久可以完成？</summary>
-        <p>【例如：一般案子約 1–4 週，會在報價時給你明確的時程。】</p>
+        <summary>為什麼打電話你沒接？</summary>
+        <p>我不接聽未知來電，麻煩先用 Email 留言，說明一下需求，我會盡快回覆。</p>
       </details>
     </div>
   </section>
 
-  <!-- ===== 06 聯絡 ===== -->
+  <!-- ===== 08 聯絡 ===== -->
   <section id="contact" class="contact">
     <div class="wrap">
       <div class="sec-head">
-        <div class="num">06 · CONTACT</div>
-        <h2>有想法？來聊聊吧</h2>
-        <p>通常會在【24 小時】內回覆。</p>
+        <div class="num">08 · CONTACT</div>
+        <h2>設備有狀況？來聊聊吧</h2>
+        <p>請先用 Email 簡單說明需求（附照片更好），我會盡快回覆。</p>
       </div>
       <div class="actions">
-        <a class="btn primary" href="mailto:【你的 email】">寄 Email</a>
-        <a class="btn" href="【LINE 連結】">加 LINE</a>
-        <a class="btn" href="【其他連結，例如 IG / FB / GitHub】">【社群】</a>
+        <a class="btn primary" href="mailto:a8501193@gmail.com">寄 Email 給我</a>
+        <!-- 有 LINE 的話把下面這行的註解拿掉，換成你的 LINE 連結 -->
+        <!-- <a class="btn" href="https://line.me/ti/p/你的ID">加 LINE</a> -->
       </div>
     </div>
   </section>
@@ -362,7 +491,7 @@
 </main>
 
 <footer>
-  <div class="wrap">© 2026 【你的名字】</div>
+  <div class="wrap">© 2026 羅睿文 · 彰化埔心</div>
 </footer>
 
 </body>
