@@ -3,42 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111315">
 <title>羅睿文｜自動化電控與設備服務</title>
 <meta name="description" content="羅睿文：十年自動化設備經驗，提供 PLC／人機圖控程式、電路圖繪製、設備查修改善、PID 溫控調適、Excel VBA 與小工具開發、室內配線水電服務。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
-  /* ===== 顏色：想換主色，改 --accent 就好 ===== */
+  /* ===== 顏色：想換強調色，改 --accent 就好 ===== */
   :root {
-    --bg: #fbfaf7;
-    --surface: #ffffff;
-    --text: #1d1d1f;
-    --muted: #5f6368;
-    --line: #e7e4dd;
-    --accent: #d9622b;
-    --accent-soft: #fbe9df;
-    --radius: 16px;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #141414;
-      --surface: #1d1d1d;
-      --text: #f2f2f2;
-      --muted: #a5a5a5;
-      --line: #2e2e2e;
-      --accent: #f08a54;
-      --accent-soft: #3a2418;
-    }
-  }
-  :root[data-theme="dark"] {
-    --bg: #141414;
-    --surface: #1d1d1d;
-    --text: #f2f2f2;
-    --muted: #a5a5a5;
-    --line: #2e2e2e;
-    --accent: #f08a54;
-    --accent-soft: #3a2418;
+    color-scheme: dark;
+    --bg: #111315;
+    --surface: #171a1d;
+    --text: #e4e4e1;
+    --muted: #9399a0;
+    --line: #262a2f;
+    --accent: #8ea4b8;
+    --accent-soft: #1d242b;
+    --radius: 6px;
   }
 
   * { box-sizing: border-box; }
@@ -48,130 +30,108 @@
     background: var(--bg);
     color: var(--text);
     font-family: "Noto Sans TC", system-ui, -apple-system, "PingFang TC", "Microsoft JhengHei", sans-serif;
-    line-height: 1.75;
+    line-height: 1.8;
     -webkit-font-smoothing: antialiased;
   }
   a { color: inherit; }
-  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
 
   /* ===== 導覽列 ===== */
   nav {
     position: sticky; top: 0; z-index: 10;
-    background: color-mix(in srgb, var(--bg) 88%, transparent);
-    backdrop-filter: blur(10px);
+    background: rgba(17, 19, 21, .92);
+    backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--line);
   }
-  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 16px; }
-  .brand { font-weight: 900; text-decoration: none; letter-spacing: .02em; }
-  nav ul { display: flex; gap: 22px; list-style: none; margin: 0; padding: 0; font-size: 15px; }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 16px; }
+  .brand { font-weight: 700; text-decoration: none; letter-spacing: .08em; }
+  nav ul { display: flex; gap: 24px; list-style: none; margin: 0; padding: 0; font-size: 14px; }
   nav ul a { text-decoration: none; color: var(--muted); }
   nav ul a:hover { color: var(--text); }
   @media (max-width: 640px) { nav ul { display: none; } }
 
   /* ===== 按鈕 ===== */
   .btn {
-    display: inline-block; padding: 12px 22px; border-radius: 999px;
-    font-weight: 700; text-decoration: none; font-size: 15px;
-    border: 1.5px solid var(--text); transition: transform .15s;
+    display: inline-block; padding: 10px 20px; border-radius: var(--radius);
+    font-weight: 500; text-decoration: none; font-size: 15px;
+    border: 1px solid var(--line); color: var(--text); transition: border-color .2s, background .2s;
   }
-  .btn:hover { transform: translateY(-2px); }
-  .btn.primary { background: var(--text); color: var(--bg); }
-  .btn.small { padding: 8px 16px; font-size: 14px; }
+  .btn:hover { border-color: var(--accent); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #0e1114; }
+  .btn.primary:hover { background: #a3b6c7; }
+  .btn.small { padding: 6px 14px; font-size: 14px; }
 
   /* ===== 首屏 ===== */
-  .hero { padding: 96px 0 72px; }
-  .eyebrow {
-    display: inline-block; background: var(--accent-soft); color: var(--accent);
-    padding: 4px 12px; border-radius: 999px; font-size: 14px; font-weight: 700;
-  }
-  .hero h1 {
-    font-size: clamp(34px, 6vw, 60px); line-height: 1.2; font-weight: 900;
-    margin: 18px 0 18px; letter-spacing: -.01em;
-  }
-  .hero h1 em { font-style: normal; color: var(--accent); }
-  .hero p.lead { font-size: clamp(17px, 2.2vw, 20px); color: var(--muted); max-width: 640px; margin: 0 0 32px; }
+  .hero { padding: 104px 0 80px; }
+  .eyebrow { font-size: 13px; color: var(--muted); letter-spacing: .12em; }
+  .hero h1 { font-size: clamp(32px, 5vw, 46px); line-height: 1.3; font-weight: 700; margin: 14px 0 6px; letter-spacing: .04em; }
+  .hero .role { font-size: clamp(17px, 2.2vw, 20px); color: var(--accent); margin: 0 0 24px; letter-spacing: .04em; }
+  .hero p.lead { font-size: 17px; color: var(--muted); max-width: 620px; margin: 0 0 32px; }
   .hero .actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
-  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 40px; padding: 0; list-style: none; }
-  .tags li { border: 1px solid var(--line); background: var(--surface); padding: 4px 12px; border-radius: 999px; font-size: 14px; color: var(--muted); }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 44px; padding: 0; list-style: none; }
+  .tags li { border: 1px solid var(--line); padding: 3px 10px; border-radius: 4px; font-size: 13px; color: var(--muted); }
 
   /* ===== 區塊 ===== */
   section { padding: 72px 0; border-top: 1px solid var(--line); }
-  .sec-head { margin-bottom: 36px; max-width: 640px; }
-  .sec-head .num { color: var(--accent); font-weight: 700; font-size: 14px; letter-spacing: .1em; }
-  .sec-head h2 { font-size: clamp(26px, 4vw, 36px); margin: 6px 0 8px; font-weight: 900; line-height: 1.3; }
-  .sec-head p { color: var(--muted); margin: 0; }
+  .sec-head { margin-bottom: 32px; max-width: 640px; }
+  .sec-head .num { color: var(--muted); font-size: 12px; letter-spacing: .2em; }
+  .sec-head h2 { font-size: clamp(22px, 3vw, 28px); margin: 4px 0 8px; font-weight: 700; line-height: 1.4; letter-spacing: .04em; }
+  .sec-head p { color: var(--muted); margin: 0; font-size: 15px; }
 
-  .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-  .card {
-    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
-    padding: 26px;
-  }
-  .card .icon { font-size: 28px; line-height: 1; }
-  .card h3 { margin: 14px 0 6px; font-size: 20px; }
+  .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); }
+  .grid.two { grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
+  .card h3 { margin: 0 0 6px; font-size: 18px; font-weight: 700; letter-spacing: .02em; }
   .card p { margin: 0 0 12px; color: var(--muted); font-size: 15px; }
   .card ul { margin: 0; padding-left: 1.1em; font-size: 15px; }
-  .card .price { margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--line); font-size: 14px; color: var(--muted); }
-  .card .price strong { color: var(--text); font-size: 16px; }
+  .card ul li::marker { color: var(--muted); }
+  .card .price { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
 
   /* 關於我 */
-  .about { display: grid; grid-template-columns: 1fr 1.6fr; gap: 40px; align-items: start; }
-  @media (max-width: 760px) { .about { grid-template-columns: 1fr; } }
-  .avatar {
-    aspect-ratio: 1; border-radius: var(--radius); background: var(--accent-soft);
-    display: grid; place-items: center; font-size: 72px; font-weight: 900; color: var(--accent);
-    overflow: hidden;
-  }
-  .avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .about { display: grid; grid-template-columns: 1fr 1.7fr; gap: 44px; align-items: start; }
+  @media (max-width: 760px) { .about { grid-template-columns: 1fr; } .avatar { max-width: 260px; } }
+  .avatar { aspect-ratio: 1; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.85); }
   .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 24px; }
-  .facts div { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
-  .facts b { display: block; font-size: 26px; font-weight: 900; }
+  .facts div { border-top: 1px solid var(--line); padding-top: 12px; }
+  .facts b { display: block; font-size: 22px; font-weight: 700; }
   .facts span { font-size: 13px; color: var(--muted); }
 
-  .grid.two { grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); }
-  /* 作品 */
-  .work .thumb {
-    aspect-ratio: 16/10; border-radius: 10px; background: var(--accent-soft);
-    margin: -6px -6px 16px; display: grid; place-items: center; color: var(--accent); font-weight: 700;
-    overflow: hidden;
-  }
-  .work .thumb img { width: 100%; height: 100%; object-fit: cover; }
-  .work .meta { font-size: 13px; color: var(--accent); font-weight: 700; }
+  /* 實績 */
+  .work .thumb { aspect-ratio: 16/9; border-radius: 4px; margin: 0 0 18px; overflow: hidden; background: var(--accent-soft); }
+  .work .thumb img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.8); }
+  .work .meta { font-size: 12px; color: var(--accent); letter-spacing: .1em; margin-bottom: 4px; }
 
   /* 流程 */
-  .steps { counter-reset: s; display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
-  .steps .card::before {
-    counter-increment: s; content: "0" counter(s);
-    font-weight: 900; font-size: 28px; color: var(--accent);
-  }
+  .steps { counter-reset: s; display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+  .steps .card::before { counter-increment: s; content: "0" counter(s); font-size: 13px; color: var(--accent); letter-spacing: .15em; }
   .steps .card h3 { margin-top: 6px; }
 
   /* FAQ */
-  details { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; margin-bottom: 10px; }
-  summary { cursor: pointer; font-weight: 700; }
+  details { border-bottom: 1px solid var(--line); padding: 16px 0; }
+  details:first-of-type { border-top: 1px solid var(--line); }
+  summary { cursor: pointer; font-weight: 500; }
   details p { color: var(--muted); margin: 10px 0 0; }
 
   /* 聯絡 */
-  .contact { text-align: center; }
-  .contact .sec-head { margin: 0 auto 28px; }
-  .contact .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .contact .actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
-  footer { padding: 32px 0; text-align: center; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
+  footer { padding: 28px 0; color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); }
 
   /* 技能分組 */
-  .skills { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-  .skills h3 { font-size: 17px; margin: 0 0 10px; }
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 0; }
-  .chips li { background: var(--accent-soft); color: var(--text); padding: 2px 10px; border-radius: 6px; font-size: 14px; }
-  .certs { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-top: 18px; }
-  .certs div { border: 1px solid var(--line); background: var(--surface); border-radius: 12px; padding: 12px 16px; font-weight: 700; }
-  .certs span { display: block; font-weight: 400; font-size: 13px; color: var(--muted); }
-  .quote { border-left: 3px solid var(--accent); padding-left: 14px; color: var(--muted); font-style: italic; }
-  .timeline { list-style: none; padding: 0; margin: 0; }
-  .timeline li { display: grid; grid-template-columns: 120px 1fr; gap: 14px; padding: 12px 0; border-bottom: 1px dashed var(--line); font-size: 15px; }
-  .timeline li:last-child { border-bottom: 0; }
-  .timeline .t { color: var(--muted); font-size: 14px; }
-  .timeline b { display: block; }
+  .skills { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); }
+  .skills h3 { font-size: 16px; margin: 0 0 12px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0 !important; margin: 0; }
+  .chips li { border: 1px solid var(--line); color: var(--text); padding: 1px 9px; border-radius: 4px; font-size: 13px; }
+  .certs { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-top: 16px; }
+  .certs div { border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 16px; font-weight: 500; font-size: 15px; }
+  .certs span { display: block; font-weight: 400; font-size: 12px; color: var(--muted); }
+  .quote { color: var(--muted); border-left: 2px solid var(--accent); padding-left: 14px; }
+  .timeline { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
+  .timeline li { display: grid; grid-template-columns: 120px 1fr; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+  .timeline .t { color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; }
+  .timeline b { display: block; font-weight: 500; }
   .timeline span { color: var(--muted); }
   @media (max-width: 520px) { .timeline li { grid-template-columns: 1fr; gap: 0; } }
 </style>
@@ -206,12 +166,13 @@
   <!-- ===== 首屏 ===== -->
   <header class="hero">
     <div class="wrap">
-      <span class="eyebrow">服務中部地區 · 可遠端</span>
-      <h1>嗨，我是羅睿文<br>讓你的設備<em>動得起來、穩得下來</em></h1>
-      <p class="lead">十年自動化設備經驗，從配線、電路圖、PLC／人機程式，到整機規劃與現場查修都做過。設備要新做、要改善、還是出了問題找不到原因，都可以找我聊聊。</p>
+      <div class="eyebrow">中部地區　·　可遠端</div>
+      <h1>羅睿文</h1>
+      <p class="role">自動化設備電控　／　設備查修與改善</p>
+      <p class="lead">十年自動化設備經驗，從配線、電路圖、PLC 與人機程式，到整機規劃與現場查修。設備新建、改善或異常排除，皆可協助評估與處理。</p>
       <div class="actions">
-        <a class="btn primary" href="#services">看看我能做什麼</a>
-        <a class="btn" href="#contact">直接聊聊</a>
+        <a class="btn primary" href="#services">服務項目</a>
+        <a class="btn" href="#contact">聯絡方式</a>
       </div>
       <ul class="tags">
         <li>PLC 程式</li>
@@ -230,12 +191,11 @@
     <div class="wrap">
       <div class="sec-head">
         <div class="num">01 · SERVICES</div>
-        <h2>我可以幫你做這些事</h2>
-        <p>不確定需要哪一種？直接跟我說你遇到的狀況，我幫你判斷該怎麼做。</p>
+        <h2>服務項目</h2>
+        <p>不確定屬於哪一類也沒關係，說明現況後再一起評估。</p>
       </div>
       <div class="grid">
         <div class="card">
-          <div class="icon">⚙️</div>
           <h3>自動化設備電控</h3>
           <p>新設備從無到有，或舊設備要升級自動化。</p>
           <ul>
@@ -247,7 +207,6 @@
           <div class="price">台達、三菱、基恩斯、AB、Codesys</div>
         </div>
         <div class="card">
-          <div class="icon">🔧</div>
           <h3>設備查修與改善</h3>
           <p>設備常當機、動作不穩、效率不好，幫你找出根本原因。</p>
           <ul>
@@ -259,7 +218,6 @@
           <div class="price">可到場，也可先遠端了解狀況</div>
         </div>
         <div class="card">
-          <div class="icon">📐</div>
           <h3>電路圖繪製＆BOM</h3>
           <p>沒有圖面、圖面跟現場對不起來，或新案需要出圖。</p>
           <ul>
@@ -271,7 +229,6 @@
           <div class="price">配電盤、控制箱、整機圖面</div>
         </div>
         <div class="card">
-          <div class="icon">💻</div>
           <h3>小工具＆資料整合</h3>
           <p>重複的手工作業，交給程式自動處理。</p>
           <ul>
@@ -280,10 +237,9 @@
             <li>MySQL／Access／MSSQL 資料庫應用</li>
             <li>Modbus RTU、TCP/IP 設備通訊收資料</li>
           </ul>
-          <div class="price">也擅長用 AI 輔助加速開發</div>
+          <div class="price">可搭配 AI 輔助開發</div>
         </div>
         <div class="card">
-          <div class="icon">🏠</div>
           <h3>室內配線＆水電</h3>
           <p>乙級室內配線技術士，家裡或店面的電路問題。</p>
           <ul>
@@ -295,7 +251,6 @@
           <div class="price">以中部地區為主</div>
         </div>
         <div class="card">
-          <div class="icon">📘</div>
           <h3>教育訓練＆技術文件</h3>
           <p>設備交機後，讓現場人員看得懂、用得順。</p>
           <ul>
@@ -303,7 +258,7 @@
             <li>新人教育訓練</li>
             <li>設備資料彙整、訂立作業規則</li>
           </ul>
-          <div class="price">把「只有一個人會」變成「大家都會」</div>
+          <div class="price">交機後的文件與訓練</div>
         </div>
       </div>
     </div>
@@ -314,8 +269,8 @@
     <div class="wrap">
       <div class="sec-head">
         <div class="num">02 · WORK</div>
-        <h2>做過的事</h2>
-        <p>問題 → 做法 → 結果。</p>
+        <h2>實績</h2>
+        <p>部分代表性的工作內容。</p>
       </div>
       <div class="grid two">
         <div class="card work">
@@ -331,13 +286,11 @@
           <p>從電源、斷路器、電磁接觸器到馬達與 DC24V 控制迴路，完整規劃並繪製電路圖，現場配線與日後維修都有圖可依。</p>
         </div>
         <div class="card work">
-          <div class="thumb">🌏</div>
           <div class="meta">海外試機驗收</div>
           <h3>日本驗收、中國上線</h3>
           <p>到職 3 個月就赴日本出差，設備順利驗收；半年後赴中國處理全自動流程的缺漏，讓設備成功上線。</p>
         </div>
         <div class="card work">
-          <div class="thumb">🤝</div>
           <div class="meta">客戶信任</div>
           <h3>被客戶指定上門維修</h3>
           <p>擔任公司與客戶之間的橋樑，把設備問題處理到位，在職期間有客戶指定由我到場維修。</p>
@@ -351,8 +304,8 @@
     <div class="wrap">
       <div class="sec-head">
         <div class="num">03 · SKILLS</div>
-        <h2>用得到的工具，我都熟</h2>
-        <p>遇到沒用過的系統也不怕：AB PLC、iFIX、InduSoft、MySQL、PID 都是到職後靠自學做到獨立作業。</p>
+        <h2>技術能力</h2>
+        <p>AB PLC、iFIX、InduSoft、MySQL、PID 等，皆是到職後以既有經驗自學至獨立作業。</p>
       </div>
       <div class="skills">
         <div class="card">
@@ -396,11 +349,11 @@
       <div>
         <div class="sec-head">
           <div class="num">04 · ABOUT</div>
-          <h2>為什麼可以找我</h2>
+          <h2>關於我</h2>
         </div>
         <p class="quote">「先處理心情，再處理事情。」</p>
         <p>我在自動化設備領域超過十年，一路從配線、識圖，到電路圖繪製、寫程式、規劃人機與圖控，再到整台設備的規劃，一步一步做上來。所以從現場到程式，我都能用同一個人的角度把問題串起來看。</p>
-        <p>遇到問題，我會去找底層原因，不停在表面。做事理性、重邏輯，也喜歡把話說在前頭：能做什麼、做不到什麼、要多久，一開始就講清楚。客戶和我一樣，都希望設備好用、沒問題，這就是我做事的目標。</p>
+        <p>遇到問題，我會去找底層原因，不停在表面。做事理性、重邏輯，也喜歡把話說在前頭：能做什麼、做不到什麼、需要多久，一開始就講清楚。設備穩定、沒有問題，是客戶和我共同的目標。</p>
         <div class="facts">
           <div><b>10+ 年</b><span>自動化設備經驗</span></div>
           <div><b>4 張</b><span>技術士證照</span></div>
@@ -415,7 +368,7 @@
     <div class="wrap">
       <div class="sec-head">
         <div class="num">05 · BACKGROUND</div>
-        <h2>經歷一覽</h2>
+        <h2>經歷</h2>
       </div>
       <ul class="timeline">
         <li><div class="t">2024 – 2026</div><div><b>電控工程師</b><span>PCB 壓合機、切張機電控；InduSoft／iFIX 圖控、PID 調適、海外試機、教育訓練</span></div></li>
@@ -435,7 +388,6 @@
       <div class="sec-head">
         <div class="num">06 · PROCESS</div>
         <h2>合作流程</h2>
-        <p>簡單、透明，每一步你都知道進度。</p>
       </div>
       <div class="steps">
         <div class="card"><h3>聊需求</h3><p>先說說設備狀況或想做的事，照片、影片、圖面都歡迎。</p></div>
@@ -477,11 +429,11 @@
     <div class="wrap">
       <div class="sec-head">
         <div class="num">08 · CONTACT</div>
-        <h2>設備有狀況？來聊聊吧</h2>
-        <p>請先用 Email 簡單說明需求（附照片更好），我會盡快回覆。</p>
+        <h2>聯絡方式</h2>
+        <p>請以 Email 簡述需求，可附上照片或圖面，收到後會盡快回覆。</p>
       </div>
       <div class="actions">
-        <a class="btn primary" href="mailto:a8501193@gmail.com">寄 Email 給我</a>
+        <a class="btn primary" href="mailto:a8501193@gmail.com">a8501193@gmail.com</a>
         <!-- 有 LINE 的話把下面這行的註解拿掉，換成你的 LINE 連結 -->
         <!-- <a class="btn" href="https://line.me/ti/p/你的ID">加 LINE</a> -->
       </div>
